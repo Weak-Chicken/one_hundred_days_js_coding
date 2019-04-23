@@ -11,8 +11,8 @@ function addTodo() {
     finishButton.setAttribute("class", "finish-button");
     finishButton.setAttribute("id", "fb" + $("#things_todo_input").val());
     finishButton.innerText = "finish";
-    document.getElementById($("#things_todo_input").val()).appendChild(deleteButton)
-    document.getElementById($("#things_todo_input").val()).appendChild(finishButton)
+    document.getElementById($("#things_todo_input").val()).appendChild(deleteButton);
+    document.getElementById($("#things_todo_input").val()).appendChild(finishButton);
 };
 
 function addFinish(val) {
@@ -21,8 +21,8 @@ function addFinish(val) {
         "id": "finished" + val,
     }).text(val));
     let deleteButton = document.createElement("button");
-    deleteButton.setAttribute("class", "delete-button");
-    deleteButton.setAttribute("id", "fdb" + $("#things_todo_input").val());
+    deleteButton.setAttribute("class", "delete-button-finish");
+    deleteButton.setAttribute("id", "fdb" + val);
     deleteButton.innerText = "delete";
     document.getElementById("finished" + val).appendChild(deleteButton)
 };
@@ -42,7 +42,7 @@ $("#todoOrderedList").on("click", ".finish-button", function(evt) {
     $("#" + currentItemID).remove();
 });
 
-$("#finishOrderedList").on("click", ".delete-button", function(evt) {
+$("#finishOrderedList").on("click", ".delete-button-finish", function(evt) {
     let currentItemID = evt.currentTarget.id.substring(3);
     $("#finished" + currentItemID).remove();
 });

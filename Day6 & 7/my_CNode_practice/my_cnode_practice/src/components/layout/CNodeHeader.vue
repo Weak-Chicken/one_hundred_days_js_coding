@@ -4,7 +4,7 @@
       <router-link to="/">
         <img src="@/assets/cnodejs_light.svg"/>
       </router-link>
-      <span class="toRight"><router-link to="/about">About</router-link></span>
+      <router-link to="/about"><span class="toRight">About</span></router-link>
     </div>
   </div>
 </template>

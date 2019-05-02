@@ -1,18 +1,23 @@
 <template>
-  <div class="posts">
-    <ul>
-      <li v-for="post in posts" v-bind:key="post.id">
-        <img v-bind:src="post.author.avatar_url" v-bind:title="post.author.loginname">
-        <span class="replyVisit">
-          {{ post.reply_count }}/{{ post.visit_count }}
-        </span>
-        {{post.title}}
-        <span class="to_right">
-            {{ post.last_reply_at}}
-        </span>
-      </li>
-    </ul>
-  </div>
+	<div class="postsShowSelection">
+		<div class="postsShowSelectionLoading" v-if="loading">
+			Loading...<i class="fa fa-refresh fa-spin"></i>
+		</div>
+		<div class="posts" v-else>
+			<ul>
+				<li v-for="post in posts" v-bind:key="post.id">
+					<img v-bind:src="post.author.avatar_url" v-bind:title="post.author.loginname">
+					<span class="replyVisit">
+						{{ post.reply_count }}/{{ post.visit_count }}
+					</span>
+					{{post.title}}
+					<span class="to_right">
+							{{ post.last_reply_at}}
+					</span>
+				</li>
+			</ul>
+		</div>
+	</div>
 </template>
 
 <script>
@@ -22,22 +27,32 @@ export default {
     name: 'posts',
 
     data() {
-        return {
-          posts: [],
-        }
+			return {
+				posts: [],
+				loading: true,
+			}
     },
     
     created() {
       axios.get('https://cnodejs.org/api/v1/topics/')
         .then(res => this.posts = res.data.data)
-        .catch(err => console.log(err));
-    }
+				.catch(err => console.log(err));
+		},
+
+		beforeMount() {
+			this.loading = false;
+		},
 }
 </script>
 
 
 <!--Copied from [SD-Gaming](https://github.com/SD-Gaming/Vue2.0_CNode.bbs)-->
 <style scoped>
+	@import "../static/lib/font-awesome-4.7.0/css/font-awesome.css";
+	
+	.postsShowSelectionLoading {
+		text-align: center;
+	}
 	.posts {
 		background-color: white;
 		padding: 0.5rem;

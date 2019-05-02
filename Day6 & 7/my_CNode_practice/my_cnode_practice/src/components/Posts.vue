@@ -1,16 +1,17 @@
 <template>
 	<div class="postsShowSelection">
-		<div class="postsShowSelectionLoading" v-if="loading">
-			Loading...<i class="fa fa-refresh fa-spin"></i>
-		</div>
-		<div class="posts" v-else>
+		<div class="posts">
 			<ul>
 				<li v-for="post in posts" v-bind:key="post.id">
-					<img v-bind:src="post.author.avatar_url" v-bind:title="post.author.loginname">
+					<router-link :to="{name: 'userpage', params:{userName: post.author.loginname}}">
+						<img v-bind:src="post.author.avatar_url" v-bind:title="post.author.loginname">
+					</router-link>
 					<span class="replyVisit">
 						{{ post.reply_count }}/{{ post.visit_count }}
 					</span>
-					{{post.title}}
+					<router-link :to="{name: 'articlepage', params:{topicId: post.id}}">
+						{{post.title}}
+					</router-link>
 					<span class="to_right">
 							{{ post.last_reply_at}}
 					</span>
@@ -21,27 +22,9 @@
 </template>
 
 <script>
-import axios from 'axios';
-
 export default {
-    name: 'posts',
-
-    data() {
-			return {
-				posts: [],
-				loading: true,
-			}
-    },
-    
-    created() {
-      axios.get('https://cnodejs.org/api/v1/topics/')
-        .then(res => this.posts = res.data.data)
-				.catch(err => console.log(err));
-		},
-
-		beforeMount() {
-			this.loading = false;
-		},
+	name: 'posts',
+	props: ["posts"],
 }
 </script>
 

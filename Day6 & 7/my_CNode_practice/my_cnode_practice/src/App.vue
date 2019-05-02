@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import cnodeheader from '@/components/layout/CNodeHeader.vue'
+import cnodeheader from '@/components/layout/CNodeHeader.vue';
 
 export default {
   components: {

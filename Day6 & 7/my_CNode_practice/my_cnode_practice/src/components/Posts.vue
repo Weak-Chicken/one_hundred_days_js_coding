@@ -24,7 +24,7 @@
 <script>
 export default {
 	name: 'posts',
-	props: ["posts"],
+	props: ['posts'],
 }
 </script>
 

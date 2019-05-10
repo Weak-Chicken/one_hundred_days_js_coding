@@ -16,9 +16,12 @@ app.get('/', function (req, res) {
   // 我刚入职阿里的时候跟着苏千和朴灵混，所以也混到了不少他们的技术堆栈，仅此而已。
   // utility 的 github 地址：https://github.com/node-modules/utility
   // 里面定义了很多常用且比较杂的辅助方法，可以去看看
-  var md5Value = utility.md5(q);
 
-  res.send(md5Value);
+  // var md5Value = utility.md5(q);
+
+  // res.send(md5Value);
+  var sha1Value = utility.sha1(q);
+  res.send(sha1Value);
 });
 
 app.listen(3000, function (req, res) {
